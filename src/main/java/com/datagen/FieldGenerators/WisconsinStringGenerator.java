@@ -92,20 +92,8 @@ public class WisconsinStringGenerator extends AWisconsinGenerator {
         }
     }
 
-    public String next(long seed) {
-        ValueType type = getValueType();
-        if ( type ==ValueType.NULL){
-            return "\"null\"";
-        } else if (type ==ValueType.MISSING){
-            return "#MISSING";
-        }
-        if (f.getOrder() != null && f.getOrder() == Order.order.RANDOM) {
-            seed = rand(seed, Long.valueOf(Server.JSONDataGenConfiguration.get(Server.CARDINALITY_NAME)));
-        }
-        if (f.getRange() > 0) {
-            seed = seed % f.getRange();
-        }
-
+    public String nextUtil(long seed)
+    {
         if (f.isVariableLength()) {
             if (f.isWord()) {
                 // Variable length word generation
@@ -169,6 +157,34 @@ public class WisconsinStringGenerator extends AWisconsinGenerator {
                 return addPaddingX(String.valueOf(field), f.isVariableLength());
             }
         }
+    }
+    public String next(long seed) {
+        ValueType type = getValueType();
+        if ( type ==ValueType.NULL){
+            return "\"null\"";
+        } else if (type ==ValueType.MISSING){
+            return "#MISSING";
+        }
+        if (f.getOrder() != null && f.getOrder() == Order.order.RANDOM) {
+            seed = rand(seed, Long.valueOf(Server.JSONDataGenConfiguration.get(Server.CARDINALITY_NAME)));
+        }
+        if (f.getRange() > 0) {
+            seed = seed % f.getRange();
+        }
+        String currentString=nextUtil(seed);
+        if (f.getPrefixLength() == 0) {
+            return currentString;
+        }
+
+        StringBuilder prefix = new StringBuilder();
+        for (int i = 0; i < f.getPrefixLength(); i++) {
+            prefix.append('X');
+        }
+
+        String modifiedString = prefix + currentString;
+
+        // Ensure the final string length is the same as the original
+        return modifiedString.substring(0, currentString.length());
     }
 
     private String addPaddingX(String value, boolean variableLength) {

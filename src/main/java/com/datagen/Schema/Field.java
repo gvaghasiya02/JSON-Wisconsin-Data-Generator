@@ -59,6 +59,7 @@ public class Field {
     private int zipfMinSize=0;
     private int zipfMaxSize=30720;
     private double zipfSkew =2;
+    public long prefixLength = 0;
 
     public boolean isZipfDistribution() {
         return zipfDistribution;
@@ -287,6 +288,14 @@ public class Field {
 
     public void setZipfSkew(double zipfSkew) {
         this.zipfSkew = zipfSkew;
+    }
+
+    public long getPrefixLength() {
+        return prefixLength;
+    }
+
+    public void setPrefixLength(long prefixLength) {
+        this.prefixLength = prefixLength;
     }
 
 }

@@ -77,21 +77,10 @@
     "range":100
   },
   {
-    "name":"stringu1",
+    "name":"prefix50string",
     "type":"string",
     "length":"100",
-    "order":"sequential"
-  },
-  {
-    "name":"stringu2",
-    "type":"string",
-    "length":"100",
-    "order":"random"
-  },
-  {
-    "name":"string4",
-    "type":"string",
-    "length":"400",
-    "order":"random"
+    "order":"random",
+    "prefixLength":"50"
   }
 ]

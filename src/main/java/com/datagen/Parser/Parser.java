@@ -80,6 +80,7 @@ public class Parser {
             field.setZipfMinSize(f.zipfMinSize);
             field.setZipfMaxSize(f.zipfMaxSize);
             field.setZipfSkew(f.zipfSkew);
+            field.setPrefixLength(f.prefixLength);
             Order.order order = f.order==null? null: (f.order.equalsIgnoreCase("random") ? Order.order.RANDOM
                     : Order.order.SEQUENTIAL);
             field.setOrder(order);

@@ -57,4 +57,5 @@ public class PField {
     public int zipfMinSize=0;
     public int zipfMaxSize=30720;
     public double zipfSkew =2;
+    public long prefixLength = 0; // New field for prefix length
 }
